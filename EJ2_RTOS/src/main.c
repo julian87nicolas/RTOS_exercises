@@ -57,6 +57,9 @@ static void vTarea1(void *pvParameters){
         xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );  //Arranca la tarea con prioridad 1 + la minima, osea menor a la de Tarea1
         //vTaskDelete(vTarea2);
       }
+      else{
+        vTaskDelete(vTarea2);
+      }
      }
 }
 
