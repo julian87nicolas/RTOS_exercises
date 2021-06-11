@@ -38,11 +38,6 @@ const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 /*==================[internal functions definition]==========================*/
 
 
-static void vTarea2( void *pvParameters){
-    Board_LED_Toggle(LED_1);  //Led amarillo
-    printf("Estado de LED amarillo cambiado a: %d\r\n", gpioRead(LED_1) );
-
-}
 
 static void vTarea1(void *pvParameters){
   bool state;
@@ -52,8 +47,16 @@ static void vTarea1(void *pvParameters){
      printf("Estado de la entrada GPIO_2: %d\r\n", state);
      if (state){
        xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
+       vTaskStartScheduler();
       }
      }
+}
+
+
+static void vTarea2( void *pvParameters){
+    Board_LED_Toggle(LED_1);  //Led amarillo
+    printf("Estado de LED amarillo cambiado a: %d\r\n", gpioRead(LED_1) );
+
 }
 
 /*==================[external functions definition]==========================*/
