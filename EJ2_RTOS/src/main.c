@@ -38,18 +38,16 @@ const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 /*==================[internal functions definition]==========================*/
 
 static void vTarea1(void *pvParameters){
-  int state;
+  bool_t state;
    for ( ;; ){
      vTaskDelay(500 / portTICK_RATE_MS);
      state = Board_GPIO_GetStatus(BOARD_GPIO_2);
      printf("Estado de la entrada GPIO_2: %d\r\n", state);
-     if ( state = 1 ){
+     if (state){
        xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
       }
      }
 }
-
-if
 
 static void vTarea2( void *pvParameters){
     Board_LED_Toggle(LED_1);  //Led amarillo
