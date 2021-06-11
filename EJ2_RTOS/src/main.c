@@ -18,7 +18,7 @@ La Tarea2 debe cambiar el estado del led amarillo, indicarlo por puerto serie y 
 #include "board.h"
 #include "FreeRTOS.h"
 #include "task.h"
-
+#include "assert.h"
 
 
 /*==================[macros and definitions]=================================*/
@@ -36,15 +36,9 @@ const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 /*==================[external data definition]===============================*/
 
 /*==================[internal functions definition]==========================*/
-int led;
 
 static void vTarea2( void *pvParameters){
-    led = gpioRead(LED_1);
-    Board_LED_Toggle(LED_1);  //Led amarillo
-    if(led != gpioRead(LED_1)){
-      led = gpioRead(LED_1);
-      printf("Estado de LED amarillo cambiado a: %d\r\n", led);
-    }
+    printf("Estado de LED amarillo: %d\r\n", gpioRead(LED_1));
     vTaskDelay(100/portTICK_RATE_MS);
     for(;;){
 
@@ -52,16 +46,12 @@ static void vTarea2( void *pvParameters){
 }
 
 static void vTarea1(void *pvParameters){
-  bool state;
-
    for ( ;; ){
-     state = Board_GPIO_GetStatus(BOARD_GPIO_2);
      vTaskDelay(500 / portTICK_RATE_MS);
-     printf("Estado de la entrada GPIO_2: %d\r\n", state);
+     printf("Estado de la entrada GPIO_2: %d\r\n", Board_GPIO_GetStatus(BOARD_GPIO_2));
 
       if (state){
-       xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
-       //vTaskStartScheduler();
+        xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
       }
      }
 }
