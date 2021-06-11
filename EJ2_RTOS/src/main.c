@@ -39,7 +39,7 @@ const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 int led;
 
 static void vTarea2( void *pvParameters){
-
+    led = gpioRead(LED_1);
     Board_LED_Toggle(LED_1);  //Led amarillo
     if(led != gpioRead(LED_1)){
       led = gpioRead(LED_1);
@@ -53,17 +53,18 @@ static void vTarea2( void *pvParameters){
 
 static void vTarea1(void *pvParameters){
   bool state;
-  led = gpioRead(LED_1);
+  state = Board_GPIO_GetStatus(BOARD_GPIO_2);
+
    for ( ;; ){
      vTaskDelay(500 / portTICK_RATE_MS);
-     state = Board_GPIO_GetStatus(BOARD_GPIO_2);
      if(state =! Board_GPIO_GetStatus(BOARD_GPIO_2)){
-       state = Board_GPIO_GetStatus(BOARD_GPIO_2);
+        state = Board_GPIO_GetStatus(BOARD_GPIO_2);
         printf("Estado de la entrada GPIO_2: %d\r\n", state);
       }
-     if (state){
+
+      if (state){
        xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
-       vTaskStartScheduler();
+       //vTaskStartScheduler();
       }
      }
 }
