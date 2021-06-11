@@ -41,9 +41,8 @@ bool status;
 
 static void vTarea2( void *pvParameters){ //La Tarea2 se declara antes para que no haya error en la compilacion.
   while (status) {
-    Board_LED_Set(LED_1, 1);
-    //Board_LED_Toggle(LED_1);
-    vTaskDelay(100/portTICK_RATE_MS);              //Cambia el valor de LED_1
+    //Board_LED_Set(LED_1, 1);
+    Board_LED_Toggle(LED_1);
     printf("Estado de LED amarillo: %d\r\n", gpioRead(LED_1));  //Lo muestra en puerto serie
     //TaskEndTrace();
     //vTaskDelete(vTarea2);
