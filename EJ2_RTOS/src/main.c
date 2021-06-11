@@ -45,7 +45,7 @@ static void vTarea2( void *pvParameters){
 }
 
 static void vTarea1(void *pvParameters){
-  bool_t state;
+  bool state;
    for ( ;; ){
      vTaskDelay(500 / portTICK_RATE_MS);
      state = Board_GPIO_GetStatus(BOARD_GPIO_2);
