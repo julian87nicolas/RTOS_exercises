@@ -51,7 +51,7 @@ static void vTarea1(void *pvParameters){
      state = Board_GPIO_GetStatus(BOARD_GPIO_2);
      printf("Estado de la entrada GPIO_2: %d\r\n", state);
      if (state){
-       xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
+       xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
        vTaskStartScheduler();
       }
      }
@@ -64,7 +64,7 @@ static void vTarea1(void *pvParameters){
 int main(void)
 {
   Board_Init();
-	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
+	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+2, NULL );
 
 	vTaskStartScheduler(); /* y por último se arranca el planificador . */
     //Nunca llegara a ese lazo  .... espero
