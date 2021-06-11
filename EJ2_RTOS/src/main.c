@@ -55,7 +55,7 @@ static void vTarea1(void *pvParameters){
      status = Board_GPIO_GetStatus(BOARD_GPIO_2);           //Lee la entrada GPIO_2
      printf("Estado de la entrada GPIO_2: %d\r\n", status); //La imprime en puerto serie
      if (status){              //Si está en alto, comienza la Tarea2.
-        xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );  //Arranca la tarea con prioridad 1 + la minima, osea menor a la de Tarea1
+        xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );  //Arranca la tarea con prioridad 1 + la minima, osea menor a la de Tarea1
         //vTaskDelete(vTarea2);
       }
       else{
