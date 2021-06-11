@@ -57,7 +57,10 @@ static void vTarea1(void *pvParameters){
    for ( ;; ){
      vTaskDelay(500 / portTICK_RATE_MS);
      state = Board_GPIO_GetStatus(BOARD_GPIO_2);
-     printf("Estado de la entrada GPIO_2: %d\r\n", state);
+     if(state =! Board_GPIO_GetStatus(BOARD_GPIO_2)){
+       state = Board_GPIO_GetStatus(BOARD_GPIO_2);
+        printf("Estado de la entrada GPIO_2: %d\r\n", state);
+      }
      if (state){
        xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
        vTaskStartScheduler();
