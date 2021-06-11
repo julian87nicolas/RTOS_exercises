@@ -37,21 +37,18 @@ const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 
 /*==================[internal functions definition]==========================*/
 
-bool status;
 
 static void vTarea2( void *pvParameters){ //La Tarea2 se declara antes para que no haya error en la compilacion.
-  while (status) {
-    //Board_LED_Set(LED_1, 1);
-    Board_LED_Toggle(LED_1);
+    Board_LED_Set(LED_1, 1);
+    //Board_LED_Toggle(LED_1);
     printf("Estado de LED amarillo: %d\r\n", gpioRead(LED_1));  //Lo muestra en puerto serie
     //TaskEndTrace();
     //vTaskDelete(vTarea2);
     vTaskDelay(100/portTICK_RATE_MS);   //Delay para permitir activar o descativar individualmente el led
-
-  }
 }
 
 static void vTarea1(void *pvParameters){
+  bool status;
   for ( ;; ){
      status = Board_GPIO_GetStatus(BOARD_GPIO_2);           //Lee la entrada GPIO_2
      if (status){              //Si está en alto, comienza la Tarea2.
