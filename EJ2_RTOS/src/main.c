@@ -37,6 +37,13 @@ const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 
 /*==================[internal functions definition]==========================*/
 
+
+static void vTarea2( void *pvParameters){
+    Board_LED_Toggle(LED_1);  //Led amarillo
+    printf("Estado de LED amarillo cambiado a: %d\r\n", gpioRead(LED_1) );
+
+}
+
 static void vTarea1(void *pvParameters){
   bool_t state;
    for ( ;; ){
@@ -49,11 +56,6 @@ static void vTarea1(void *pvParameters){
      }
 }
 
-static void vTarea2( void *pvParameters){
-    Board_LED_Toggle(LED_1);  //Led amarillo
-    printf("Estado de LED amarillo cambiado a: %d\r\n", gpioRead(LED_1) );
-
-}
 /*==================[external functions definition]==========================*/
 
 int main(void)
