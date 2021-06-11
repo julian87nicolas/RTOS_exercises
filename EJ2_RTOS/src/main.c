@@ -5,11 +5,21 @@ La Tarea1 debe leer el valor de la entrada GPIO_2 cada 500 ms,
 indicando su estado por puerto serie. En caso de estar activa, crear la Tarea2.
 La Tarea2 debe cambiar el estado del led amarillo, indicarlo por puerto serie y terminar.
   */
+
+  /*
+
+  LED_1 = amarillo
+  LED_2 = rojo
+  LED_3 = verde
+
+  */
  /*==================[inclusions]=============================================*/
 
 #include "board.h"
 #include "FreeRTOS.h"
 #include "task.h"
+
+
 
 /*==================[macros and definitions]=================================*/
 
@@ -42,8 +52,8 @@ static void vTarea1(void *pvParameters){
 
 static void vTarea2( void *pvParameters){
     Board_LED_Toggle(LED_1);  //Led amarillo
-    printf("Estado de LED amarillo cambiado a: %d\r\n", gpioRead(LED_1) )
-  
+    printf("Estado de LED amarillo cambiado a: %d\r\n", gpioRead(LED_1) );
+
 }
 /*==================[external functions definition]==========================*/
 
