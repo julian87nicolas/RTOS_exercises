@@ -37,25 +37,27 @@ const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 
 /*==================[internal functions definition]==========================*/
 
-static void vTarea2( void *pvParameters){ //La Tarea2 se deeclara antes para que no haya error en la compilacion.
-  for(;;){
+static void vTarea2( void *pvParameters){ //La Tarea2 se declara antes para que no haya error en la compilacion.
+  //for(;;){
       Board_LED_Toggle(LED_1);
       vTaskDelay(100/portTICK_RATE_MS);              //Cambia el valor de LED_1
       printf("Estado de LED amarillo: %d\r\n", gpioRead(LED_1));  //Lo muestra en puerto serie
       //TaskEndTrace();
       //vTaskDelete(vTarea2);
       vTaskDelay(100/portTICK_RATE_MS);   //Delay para permitir activar o descativar individualmente el led
-    }
+    //}
 }
 
 static void vTarea1(void *pvParameters){
   bool status;
   for ( ;; ){
      status = Board_GPIO_GetStatus(BOARD_GPIO_2);           //Lee la entrada GPIO_2
-     printf("Estado de la entrada GPIO_2: %d\r\n", status); //La imprime en puerto serie
      if (status){              //Si está en alto, comienza la Tarea2.
         xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );  //Arranca la tarea con prioridad 1 + la minima, osea menor a la de Tarea1
         //vTaskDelete(vTarea2);
+      }
+      else{
+        printf("Estado de la entrada GPIO_2: %d\r\n", status); //La imprime en puerto serie
       }
       vTaskDelay(500 / portTICK_RATE_MS);                    //Delay de 500ms
      }
