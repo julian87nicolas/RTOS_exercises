@@ -38,6 +38,7 @@ const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 /*==================[internal functions definition]==========================*/
 
 static void vTarea2( void *pvParameters){
+    Board_LED_Toggle(LED_1);
     printf("Estado de LED amarillo: %d\r\n", gpioRead(LED_1));
     vTaskDelay(100/portTICK_RATE_MS);
     for(;;){
