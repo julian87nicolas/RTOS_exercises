@@ -36,7 +36,7 @@ const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 /*==================[external data definition]===============================*/
 
 /*==================[internal functions definition]==========================*/
-int led = gpioRead(LED_1);
+int led;
 
 static void vTarea2( void *pvParameters){
 
@@ -53,6 +53,7 @@ static void vTarea2( void *pvParameters){
 
 static void vTarea1(void *pvParameters){
   bool state;
+  led = gpioRead(LED_1);
    for ( ;; ){
      vTaskDelay(500 / portTICK_RATE_MS);
      state = Board_GPIO_GetStatus(BOARD_GPIO_2);
