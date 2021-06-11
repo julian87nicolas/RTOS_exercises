@@ -50,7 +50,7 @@ static void vTarea1(void *pvParameters){
      vTaskDelay(500 / portTICK_RATE_MS);
      printf("Estado de la entrada GPIO_2: %d\r\n", Board_GPIO_GetStatus(BOARD_GPIO_2));
 
-      if (state){
+      if (Board_GPIO_GetStatus(BOARD_GPIO_2)){
         xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
       }
      }
