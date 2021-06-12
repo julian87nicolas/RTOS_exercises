@@ -41,17 +41,10 @@ TaskHandle_t idTarea1, idTarea2;
 
 
 static void vTarea2( void *pvParameters){ //La Tarea2 se declara antes para que no haya error en la compilacion.
-  UBaseType_t uxPriority2;
-  uxPriority2 = uxTaskPriorityGet( NULL );   //Almacena la prioridad de la tarea actual en la variable uxPriority2
-  //for(;;){
-  //Board_LED_Set(LED_1, 1);
-    Board_LED_Toggle(LED_1);
-    printf("Estado de LED amarillo: %d\r\n", gpioRead(LED_1));  //Lo muestra en puerto serie
-    //vTaskDelay(500/portTICK_RATE_MS);
-    //vTaskPrioritySet( NULL, tskIDLE_PRIORITY+1 );     //Disminuye la prioridad de la tarea actual para que en el proximo tick se ejecute la tarea1
-    //TaskEndTrace();
-    vTaskDelete(NULL); //Delay para permitir activar o descativar individualmente el led
-
+  Board_LED_Toggle(LED_1);
+  printf("Estado de LED amarillo: %d\r\n", gpioRead(LED_1));
+  printf("%d\n", Board_GPIO_GetStatus(LED_1));  //Lo muestra en puerto serie
+  vTaskDelete(NULL); //Delay para permitir activar o descativar individualmente el led
 }
 
 
@@ -59,18 +52,17 @@ static void vTarea1(void *pvParameters){
   bool status, t = 0;
   UBaseType_t uxPriority1;
   uxPriority1 = uxTaskPriorityGet( NULL );
-  for ( ;; ){
-     vTaskDelay(500 / portTICK_RATE_MS);
-     status = Board_GPIO_GetStatus(BOARD_GPIO_2);           //Lee la entrada GPIO_2
-     printf("Estado de la entrada GPIO_2: %d\r\n", status); //La imprime en puerto serie
-     if (status){
-       xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, uxPriority1 + 1, &idTarea2 );  //Arranca la tarea con prioridad mayor a tarea1 asi aranca de inmediato
-       t = true;
-      }
-      }
-  
-}
 
+  for ( ;; ){
+
+     if (status){
+       xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, uxPriority1 + 1, &idTarea2 );  //Arranca la tarea con prioridad mayor a tarea1 asi aranca de inmediato      }
+     }
+     printf("Estado de la entrada GPIO_2: %d\r\n", status); //La imprime en puerto serie
+     status = Board_GPIO_GetStatus(BOARD_GPIO_2);           //Lee la entrada GPIO_2
+     vTaskDelay(500 / portTICK_RATE_MS);
+   }
+}
 
 
 /*==================[external functions definition]==========================*/
