@@ -51,7 +51,7 @@ static void vTarea2( void *pvParameters){ //La Tarea2 se declara antes para que 
     //vTaskPrioritySet( NULL, tskIDLE_PRIORITY+1 );     //Disminuye la prioridad de la tarea actual para que en el proximo tick se ejecute la tarea1
     //TaskEndTrace();
     vTaskDelete(NULL); //Delay para permitir activar o descativar individualmente el led
-  }
+
 }
 
 
@@ -68,7 +68,7 @@ static void vTarea1(void *pvParameters){
        t = true;
       }
       }
-    }
+  
 }
 
 
