@@ -43,14 +43,14 @@ TaskHandle_t idTarea1, idTarea2;
 static void vTarea2( void *pvParameters){ //La Tarea2 se declara antes para que no haya error en la compilacion.
   UBaseType_t uxPriority2;
   uxPriority2 = uxTaskPriorityGet( NULL );   //Almacena la prioridad de la tarea actual en la variable uxPriority2
-  for(;;){
+  //for(;;){
   //Board_LED_Set(LED_1, 1);
     Board_LED_Toggle(LED_1);
     printf("Estado de LED amarillo: %d\r\n", gpioRead(LED_1));  //Lo muestra en puerto serie
-    vTaskDelay(500/portTICK_RATE_MS);
-    vTaskPrioritySet( NULL, tskIDLE_PRIORITY+1 );     //Disminuye la prioridad de la tarea actual para que en el proximo tick se ejecute la tarea1
+    //vTaskDelay(500/portTICK_RATE_MS);
+    //vTaskPrioritySet( NULL, tskIDLE_PRIORITY+1 );     //Disminuye la prioridad de la tarea actual para que en el proximo tick se ejecute la tarea1
     //TaskEndTrace();
-    //vTaskDelete(vTarea2); //Delay para permitir activar o descativar individualmente el led
+    vTaskDelete(NULL); //Delay para permitir activar o descativar individualmente el led
   }
 }
 
@@ -64,13 +64,9 @@ static void vTarea1(void *pvParameters){
      status = Board_GPIO_GetStatus(BOARD_GPIO_2);           //Lee la entrada GPIO_2
      printf("Estado de la entrada GPIO_2: %d\r\n", status); //La imprime en puerto serie
      if (status){
-       if(!t){
-         t = true;
-         xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, uxPriority1 + 1, &idTarea2 );  //Arranca la tarea con prioridad mayor a tarea1 asi aranca de inmediato
-        }
-        else{
-          //vTaskPrioritySet( &idTarea2 ,  uxPriority1+1 );
-        }
+       xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, uxPriority1 + 1, &idTarea2 );  //Arranca la tarea con prioridad mayor a tarea1 asi aranca de inmediato
+       t = true;
+      }
       }
     }
 }
