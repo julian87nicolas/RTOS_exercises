@@ -46,9 +46,9 @@ static void vTarea2( void *pvParameters){ //La Tarea2 se declara antes para que 
   for(;;){
   //Board_LED_Set(LED_1, 1);
     Board_LED_Toggle(LED_1);
-    printf("Estado de LED amarillo: %b\r\n", gpioRead(LED_1));  //Lo muestra en puerto serie
-    vTaskDelay(10/portTICK_RATE_MS);
-    vTaskPrioritySet( NULL, uxPriority2-2 );     //Disminuye la prioridad de la tarea actual para que en el proximo tick se ejecute la tarea1
+    printf("Estado de LED amarillo: %d\r\n", gpioRead(LED_1));  //Lo muestra en puerto serie
+    vTaskDelay(500/portTICK_RATE_MS);
+    vTaskPrioritySet( &idTarea2, uxPriority2-1 );     //Disminuye la prioridad de la tarea actual para que en el proximo tick se ejecute la tarea1
     //TaskEndTrace();
     //vTaskDelete(vTarea2); //Delay para permitir activar o descativar individualmente el led
   }
