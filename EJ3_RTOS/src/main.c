@@ -54,7 +54,7 @@ static void vTarea1(void *pvParameters){
      printf("\r\nEstado de la entrada GPIO_0 GPIO_1 GPIO_2 GPIO_3:\r\n");
      printf("\r\n%d, %d, %d, %d", state0, state1, state2, state3);
      vTaskDelay(500 / portTICK_RATE_MS);
-     vTaskPrioritySet(&idTarea2, prioridad+1);
+     vTaskPrioritySet(&idTarea2, prioridad+2);
    }
 }
 
@@ -63,7 +63,7 @@ static void vTarea2( void *pvParameters){
     UBaseType_t prioridad;
     prioridad = uxTaskPriorityGet(NULL);
     Board_LED_Toggle(LED_3);  //Verde
-    printf("Estado de LED amarillo cambiado a: %d\r\n", gpioRead(LED_3) );
+    printf("\r\nEstado de LED amarillo cambiado a: %d\r\n", gpioRead(LED_3) );
     vTaskPrioritySet(NULL, prioridad-2);
   }
 }
