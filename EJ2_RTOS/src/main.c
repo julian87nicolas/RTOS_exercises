@@ -60,11 +60,11 @@ static void vTarea1(void *pvParameters){
   UBaseType_t uxPriority1;
   uxPriority1 = uxTaskPriorityGet( NULL );
   for ( ;; ){
+     vTaskDelay(500 / portTICK_RATE_MS);
      status = Board_GPIO_GetStatus(BOARD_GPIO_2);           //Lee la entrada GPIO_2
      printf("Estado de la entrada GPIO_2: %d\r\n", status); //La imprime en puerto serie
-     vTaskDelay(500 / portTICK_RATE_MS);
      if (status){
-       if(t=0){
+       if(t==0){
          t=1;
          xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, uxPriority1 + 1, &idTarea2 );  //Arranca la tarea con prioridad mayor a tarea1 asi aranca de inmediato
         }
