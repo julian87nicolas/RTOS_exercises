@@ -57,8 +57,8 @@ static void vTarea2( void *pvParameters){ //La Tarea2 se declara antes para que 
 
 static void vTarea1(void *pvParameters){
   bool status, t = 0;
-  uxPriority1 = uxTaskPriorityGet( NULL );
   UBaseType_t uxPriority1;
+  uxPriority1 = uxTaskPriorityGet( NULL );
   for ( ;; ){
      status = Board_GPIO_GetStatus(BOARD_GPIO_2);           //Lee la entrada GPIO_2
      printf("Estado de la entrada GPIO_2: %d\r\n", status); //La imprime en puerto serie
