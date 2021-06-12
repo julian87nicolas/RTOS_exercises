@@ -54,7 +54,7 @@ static void vTarea1(void *pvParameters){
      printf("\r\nEstado de la entrada GPIO_0 GPIO_1 GPIO_2 GPIO_3:");
      printf("\r\n%d, %d, %d, %d", state0, state1, state2, state3);
      vTaskDelay(500 / portTICK_RATE_MS);
-     vTaskPrioritySet(idTarea2, prioridad+2);
+     vTaskPrioritySet(idTarea2, prioridad+1);
    }
 }
 
