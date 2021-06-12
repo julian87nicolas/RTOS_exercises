@@ -43,7 +43,7 @@ TaskHandle_t idTarea1, idTarea2;
 static void vTarea2( void *pvParameters){ //La Tarea2 se declara antes para que no haya error en la compilacion.
   Board_LED_Toggle(LED_1);
   printf("Estado de LED amarillo: %d\r\n", gpioRead(LED_1));
-  printf("%d\n", Board_GPIO_GetStatus(LED_1));  //Lo muestra en puerto serie
+  printf("Estado LED AMARILLO: %d\r\n", Board_GPIO_GetStatus(LED_1));  //Lo muestra en puerto serie
   vTaskDelete(NULL); //Delay para permitir activar o descativar individualmente el led
 }
 
