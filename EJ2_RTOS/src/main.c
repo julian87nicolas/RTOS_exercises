@@ -84,7 +84,7 @@ int main(void)
 {
   Board_Init();
 
-  xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+2, &prTarea1 ); //Arranca la tarea dos con prioridad 2 + la mínima
+  xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+2, &idTarea1 ); //Arranca la tarea dos con prioridad 2 + la mínima
 
 	vTaskStartScheduler(); //Arranca el planificador
 
