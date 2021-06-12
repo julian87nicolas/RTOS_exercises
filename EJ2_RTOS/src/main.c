@@ -33,7 +33,7 @@ La Tarea2 debe cambiar el estado del led amarillo, indicarlo por puerto serie y 
 /*==================[internal data definition]===============================*/
 const char *pcTextoTarea1 = "Tarea1 is running\r\n";
 const char *pcTextoTarea2 = "Tarea2 is running\r\n";
-TaskHandle_t prTarea1, prTarea2;
+TaskHandle_t idTarea1, idTarea2;
 
 /*==================[external data definition]===============================*/
 
@@ -56,15 +56,21 @@ static void vTarea2( void *pvParameters){ //La Tarea2 se declara antes para que 
 
 
 static void vTarea1(void *pvParameters){
-  bool status;
-  UBaseType_t uxPriority1;
+  bool status, t = 0;
   uxPriority1 = uxTaskPriorityGet( NULL );
+  UBaseType_t uxPriority1;
   for ( ;; ){
      status = Board_GPIO_GetStatus(BOARD_GPIO_2);           //Lee la entrada GPIO_2
      printf("Estado de la entrada GPIO_2: %d\r\n", status); //La imprime en puerto serie
      vTaskDelay(500 / portTICK_RATE_MS);
-     if (status){              //Si está en alto, comienza la Tarea2.
-        xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, uxPriority1 + 1, &prTarea2 );  //Arranca la tarea con prioridad mayor a tarea1 asi aranca de inmediato
+     if (status){
+       if(t=0){
+         t=1;
+         xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, uxPriority1 + 1, &idTarea2 );  //Arranca la tarea con prioridad mayor a tarea1 asi aranca de inmediato
+        }
+        else{
+          vTaskPrioritySet( &idTarea2 ,  uxPriority1+1 );
+        }
       }
     }
 }
