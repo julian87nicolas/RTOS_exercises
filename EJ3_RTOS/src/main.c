@@ -38,6 +38,8 @@ const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 
 /*==================[internal functions definition]==========================*/
 
+TaskHandle_t idTarea2;
+
 static void vTarea1(void *pvParameters){
   int state0, state1, state2, state3;
   //uint8 state0, state1, state2, state3;
@@ -55,10 +57,13 @@ static void vTarea1(void *pvParameters){
 }
 
 static void vTarea2( void *pvParameters){
+  for(;;){
+    UBaseType_t prioridad;
+    prioridad = uxTaskPriorityGet(NULL);
     Board_LED_Toggle(LED_3);  //Verde
     printf("Estado de LED amarillo cambiado a: %d\r\n", gpioRead(LED_3) );
-    vTaskPrioritySet(vTarea2, tskIDLE_PRIORITY+1);
-
+    vTaskPrioritySet(NULL, prioridad+1);
+  }
 }
 /*==================[external functions definition]==========================*/
 
@@ -66,7 +71,7 @@ int main(void)
 {
   Board_Init();
   xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+2, NULL );
-  xTaskCreate(vTarea2, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
+  xTaskCreate(vTarea2, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, &idTarea2 );
 
 	vTaskStartScheduler(); /* y por último se arranca el planificador . */
     //Nunca llegara a ese lazo  .... espero
