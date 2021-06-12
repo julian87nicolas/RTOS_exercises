@@ -42,6 +42,8 @@ TaskHandle_t idTarea2;
 
 static void vTarea1(void *pvParameters){
   int state0, state1, state2, state3;
+  UBaseType_t prioridad;
+  prioridad = uxTaskPriorityGet(NULL);
   //uint8 state0, state1, state2, state3;
   //nibble state0, state1, state2, state3;
    for ( ;; ){
@@ -52,8 +54,8 @@ static void vTarea1(void *pvParameters){
      state3 = Board_GPIO_GetStatus(BOARD_GPIO_3);
      printf("\r\nEstado de la entrada GPIO_0 GPIO_1 GPIO_2 GPIO_3:\r\n");
      printf("\r\n%d, %d, %d, %d", state0, state1, state2, state3);
-     uxTaskPriority(vTarea2);
-     }
+     vTaskPrioritySet(&idTarea2, prioridad+1);
+   }
 }
 
 static void vTarea2( void *pvParameters){
