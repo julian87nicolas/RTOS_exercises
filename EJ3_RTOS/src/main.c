@@ -59,9 +59,9 @@ static void vTarea1(void *pvParameters){
 }
 
 static void vTarea2( void *pvParameters){
+  UBaseType_t prioridad2;
+  prioridad2 = uxTaskPriorityGet(NULL);
   for(;;){
-    UBaseType_t prioridad2;
-    prioridad2 = uxTaskPriorityGet(NULL);
     Board_LED_Toggle(LED_3);  //Verde
     printf("\r\nEstado de LED amarillo cambiado a: %d\r\n", gpioRead(LED_3) );
     vTaskPrioritySet(NULL, prioridad2-2);
