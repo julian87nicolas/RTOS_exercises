@@ -32,6 +32,7 @@ La Tarea2 debe cambiar el estado del led amarillo, indicarlo por puerto serie y 
 /*==================[internal data definition]===============================*/
 const char *pcTextoTarea1 = "Tarea1 is running\r\n";
 const char *pcTextoTarea2 = "Tarea2 is running\r\n";
+TaskHandle_t prTarea1, prTarea2;
 
 /*==================[external data definition]===============================*/
 
@@ -39,25 +40,29 @@ const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 
 
 static void vTarea2( void *pvParameters){ //La Tarea2 se declara antes para que no haya error en la compilacion.
-
-//for(;;){
-    //Board_LED_Set(LED_1, 1);
+  UBaseType_t uxPriority2;
+  uxPriority2 = uxTaskPriorityGet( NULL );   //Almacena la prioridad de la tarea actual en la variable uxPriority2
+  for(;;){
+  //Board_LED_Set(LED_1, 1);
     Board_LED_Toggle(LED_1);
     printf("Estado de LED amarillo: %b\r\n", gpioRead(LED_1));  //Lo muestra en puerto serie
+    vTaskPrioritySet( xTask2Handle, ( uxPriority - 2 ) );     //Disminuye la prioridad de la tarea actual para que en el proximo tick se ejecute la tarea1
     //TaskEndTrace();
     //vTaskDelete(vTarea2); //Delay para permitir activar o descativar individualmente el led
-  //}
+  }
 }
 
 
 static void vTarea1(void *pvParameters){
   bool status;
+  UBaseType_t uxPriority1;
+  uxPriority1 = uxTaskPriorityGet( NULL );
   for ( ;; ){
      status = Board_GPIO_GetStatus(BOARD_GPIO_2);           //Lee la entrada GPIO_2
      printf("Estado de la entrada GPIO_2: %b\r\n", status); //La imprime en puerto serie
      vTaskDelay(500 / portTICK_RATE_MS);
      if (status){              //Si está en alto, comienza la Tarea2.
-        xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );  //Arranca la tarea con prioridad 1 + la minima, osea menor a la de Tarea1
+        xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, uxPriority1 + 1, &prTarea2 );  //Arranca la tarea con prioridad mayor a tarea1 asi aranca de inmediato
       }
     }
 }
@@ -66,11 +71,12 @@ static void vTarea1(void *pvParameters){
 
 /*==================[external functions definition]==========================*/
 
+
 int main(void)
 {
   Board_Init();
 
-  xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+3, NULL ); //Arranca la tarea dos con prioridad 2 + la mínima
+  xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+3, &prTarea1 ); //Arranca la tarea dos con prioridad 2 + la mínima
 
 	vTaskStartScheduler(); //Arranca el planificador
 
