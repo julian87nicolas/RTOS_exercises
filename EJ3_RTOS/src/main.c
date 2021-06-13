@@ -62,7 +62,7 @@ static void vTarea2( void *pvParameters){
   for(;;){
 
     Board_LED_Toggle(LED_3);  //Verde
-    printf("\r\nEstado de LED Verde cambiado a: %d\r\n", Board_LED_GetStatus(LED_3));
+    printf("\r\nEstado de LED Verde cambiado a: %d\r\n", Board_TEC_GetStatus(LED_3));
     vTaskDelay(500 / portTICK_RATE_MS);
     vTaskPrioritySet(NULL, prioridad2-1);
   }
