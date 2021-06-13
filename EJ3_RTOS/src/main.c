@@ -61,7 +61,7 @@ static void vTarea2( void *pvParameters){
   prioridad2 = uxTaskPriorityGet(NULL);
   for(;;){
     Board_LED_Toggle(LED_3);  //Verde
-    printf("\r\nEstado de LED amarillo cambiado a la madre: %d\r\n", gpioRead(LED_3));
+    printf("\r\nEstado de LED amarillo cambiado: %d\r\n", gpioRead(LED_3));
     vTaskDelay(500 / portTICK_RATE_MS);
     vTaskPrioritySet(idTarea2, prioridad2-2);
   }
