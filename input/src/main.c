@@ -31,9 +31,10 @@ int main(void)
 
   for(;;){
     Board_LED_Set(LED_1, Board_GPIO_GetStatus(BOARD_GPIO_1));
-  //printf("Estado del LED_1 con Board_LED_GetStatus:%d\r\n", Board_LED_GetStatus(LED_1));
-    printf("Estado del LED_1 con gpioRead:%d\r\n", gpioRead(LED_1));
-    printf("Estado del LED_1 con Board_TEC_GetStatus:%d\r\n", Board_TEC_GetStatus(LED_1));
+    //printf("Estado del LED_1 con Board_LED_GetStatus:%d\r\n", Board_LED_GetStatus(LED_1));
+    //printf("Estado del LED_1 con gpioRead:%d\r\n", gpioRead(LED_1));
+    //printf("Estado del LED_1 con Board_TEC_GetStatus:%d\r\n", Board_TEC_GetStatus(LED_1));
+    printf("Estado del LED_1 con Board_LED_Get:%d\r\n", Board_LED_Get(LED_1));
   }
 }
 
