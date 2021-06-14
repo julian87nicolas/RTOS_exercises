@@ -34,7 +34,7 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 /*==================[internal functions declaration]=========================*/
 
 /*==================[internal data definition]===============================*/
-const char *pcTextoTarea1 = "Tarea1\r\n";
+const char *pcTextoTarea1 = "Tarea1 en funcionamiento\r\n";
 const char *pcTextoTarea2 = "Tarea2\r\n";
 
 static void vTarea1(void *pvParameters){
@@ -42,8 +42,8 @@ static void vTarea1(void *pvParameters){
   UBaseType_t prioridad;
   prioridad = uxTaskPriorityGet(NULL);
    for ( ;; ){
-     printf("\r\n%s", &pvParameters);
-     printf("\r\nPrioridad de la tarea: %d", prioridad);
+     printf(&pvParameters);
+     printf("\r\nPrioridad: %d\r\n", prioridad);
 
      vTaskDelay(500/ portTICK_RATE_MS);
    }
