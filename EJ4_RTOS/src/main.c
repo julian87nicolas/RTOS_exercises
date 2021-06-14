@@ -64,7 +64,7 @@ int main(void){
 
 
   xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+2, NULL );
-  xTaskCreate(vTarea1, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, &idTarea2 );
+  xTaskCreate(vTarea1, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
 
   //VER COMO SUAR IDLE HOOK
 
