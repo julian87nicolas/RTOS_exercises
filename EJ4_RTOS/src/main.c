@@ -50,7 +50,7 @@ static void vTarea1(void *pvParameters){
 }
 
 void vApplicationIdleHook(void){
-  print("\r\nIdle Hook en funcionamiento");
+  printf("\r\nIdle Hook en funcionamiento");
   Board_LED_Toggle(LED_BLUE);
   vTaskDelay(300/ portTICK_RATE_MS);
 }
