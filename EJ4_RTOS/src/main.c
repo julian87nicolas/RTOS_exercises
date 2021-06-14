@@ -39,8 +39,8 @@ static void vTarea1(void *pvParameters){
    for ( ;; ){
      printf((void*)pvParameters);
      printf("\r\nPrioridad: %d\r\n", prioridad);
-     printf(portTICK_RATE_MS);
-     vTaskDelay( 500 );
+     //printf(portTICK_RATE_MS);
+     //vTaskDelay( 500 );
    }
 }
 
