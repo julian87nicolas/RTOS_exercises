@@ -59,8 +59,7 @@ void vApplicationIdleHook(void){
 int main(void){
 
   char t1[10], t2[10];
-  t1 = "Tarea1"
-  t2 = "Tarea2"
+
   Board_Init();
 
 
