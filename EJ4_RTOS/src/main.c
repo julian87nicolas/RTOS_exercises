@@ -37,9 +37,10 @@ static void vTarea1(void *pvParameters){
   UBaseType_t prioridad;
   prioridad = uxTaskPriorityGet(NULL);
    for ( ;; ){
-     vTaskDelay( 500 / portTICK_RATE_MS);
      printf((void*)pvParameters);
      printf("\r\nPrioridad: %d\r\n", prioridad);
+     printf("Coso: %d",  portTICK_RATE_MS)
+     vTaskDelay( 500 );
    }
 }
 
