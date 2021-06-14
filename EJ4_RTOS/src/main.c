@@ -42,16 +42,16 @@ static void vTarea1(void *pvParameters){
   UBaseType_t prioridad;
   prioridad = uxTaskPriorityGet(NULL);
    for ( ;; ){
+     vTaskDelay( 500 / portTICK_RATE_MS);
      printf((void*)pvParameters);
      printf("\r\nPrioridad: %d\r\n", prioridad);
    }
-   vTaskDelay(500/ portTICK_RATE_MS);
 }
 
 void vApplicationIdleHook(void){
   printf("\r\nIdle Hook en funcionamiento");
   Board_LED_Toggle(LED_BLUE);
-  vTaskDelay(300/ portTICK_RATE_MS);
+  vTaskDelay( 300 / portTICK_RATE_MS);
 }
 
 /*--------------MAIN-----------------*/
