@@ -44,17 +44,15 @@ static void vTarea1(void *pvParameters){
    }
 }
 
-void vApplicationIdleHook(void){
+void vApplicationIdleHook( void ){
   printf("\r\nIdle Hook en funcionamiento");
   Board_LED_Toggle(LED_BLUE);
-  vTaskDelay( 300 / portTICK_RATE_MS);
+  vTaskDelay( 30 / portTICK_RATE_MS);
 }
 
 /*--------------MAIN-----------------*/
 
 int main(void){
-
-  char t1[10], t2[10];
 
   Board_Init();
 
@@ -66,7 +64,9 @@ int main(void){
 
   vTaskStartScheduler();
 
-     for( ;; );
+  for( ;; ){
+
+     }
      return 0;
 }
 
