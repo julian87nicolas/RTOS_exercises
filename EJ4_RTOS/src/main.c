@@ -35,7 +35,7 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 
 /*==================[internal data definition]===============================*/
 const char *pcTextoTarea1 = "Tarea1 en funcionamiento\r\n";
-const char *pcTextoTarea2 = "Tarea2\r\n";
+const char *pcTextoTarea2 = "Tarea2 en funcionamiento\r\n";
 
 static void vTarea1(void *pvParameters){
   int state0, state1, state2, state3;
@@ -50,6 +50,7 @@ static void vTarea1(void *pvParameters){
 }
 
 void vApplicationIdleHook(void){
+  print("\r\nIdle Hook en funcionamiento");
   Board_LED_Toggle(LED_BLUE);
   vTaskDelay(300/ portTICK_RATE_MS);
 }
@@ -64,7 +65,7 @@ int main(void){
 
 
   xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+2, NULL );
-  xTaskCreate(vTarea1, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
+  xTaskCreate(vTarea1, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
 
   //VER COMO SUAR IDLE HOOK
 
