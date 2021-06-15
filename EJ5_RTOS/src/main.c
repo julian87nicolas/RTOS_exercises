@@ -17,6 +17,7 @@ Indique que pasa en caso de que el timeout de la escritura en la cola de mensaje
 #include "board.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "queue.h"
 
 /*==================[macros and definitions]=================================*/
 
@@ -31,7 +32,7 @@ const char *pcTextoTarea1 = "Tarea1 is running\r\n";
 const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 
 /*==================[external data definition]===============================*/
-xQueueHandle_t cola_msj;
+QueueHandle_t cola_msj;
 /*==================[internal funQctions definition]==========================*/
 
 static void vTarea1(void *pvParameters){
