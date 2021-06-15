@@ -53,9 +53,9 @@ void vApplicationIdleHook( void ){
 
     if( xLastWakeTime + ( 300 / portTICK_RATE_MS ) == xTaskGetTickCount()){
       xLastWakeTime = xTaskGetTickCount();
-      printf("\r\nIdle Hook en funcionamiento");
+      printf("\r\n\r\nIDLE Hook en funcionamiento");
       Board_LED_Toggle(LED_BLUE);
-      printf("\r\nEstado de LED cambiado a: %d", Board_LED_Test(LED_BLUE));
+      printf("\r\nEstado de LED cambiado a: %d\r\n\r\n", Board_LED_Test(LED_BLUE));
     }
 
 }
