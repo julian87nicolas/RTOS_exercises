@@ -31,7 +31,7 @@ const char *pcTextoTarea1 = "Tarea1 is running\r\n";
 const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 
 /*==================[external data definition]===============================*/
-QueueHandle_t cola_msj;
+xQueueHandle_t cola_msj;
 /*==================[internal funQctions definition]==========================*/
 
 static void vTarea1(void *pvParameters){
