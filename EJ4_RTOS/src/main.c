@@ -24,7 +24,6 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 #include "board.h"
 #include "FreeRTOS.h"
 #include "task.h"
-#include "sapi.h"
 
 /*==================[macros and definitions]=================================*/
 
@@ -32,12 +31,13 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 
 const char *pcTextoTarea1 = "\r\nTarea1 en funcionamiento";
 const char *pcTextoTarea2 = "\r\nTarea2 en funcionamiento";
+TickType_t xLastWakeTime;
 
 static void vTarea(void *pvParameters){
-  int state0, state1, state2, state3;
-
-  UBaseType_t prioridad;
   TickType_t xLastWakeTime, delay;
+
+  int state0, state1, state2, state3;
+  UBaseType_t prioridad;
   prioridad = uxTaskPriorityGet(NULL);
   xLastWakeTime = xTaskGetTickCount();
 
@@ -45,28 +45,25 @@ static void vTarea(void *pvParameters){
      //vTaskDelayUntil(&xLastWakeTime, 500 / portTICK_RATE_MS );
      printf((void*)pvParameters);
      printf("\r\nPrioridad: %d\r\n", prioridad);
-     //vTaskDelay(50);
-     //printf(portTICK_RATE_MS);
+     vTaskDelay(500 / portTICK_RATE_MS);
    }
 }
 
 void vApplicationIdleHook( void ){
-  TickType_t xLastWakeTime;
-  //xLastWakeTime = xTaskGetTickCount();
-  //vTaskDelayUntil(&xLastWakeTime, 300 / portTICK_RATE_MS );
 
-  for(;;){
-    printf("\r\nIdle Hook en funcionamiento");
-    Board_LED_Toggle(LED_BLUE);
-    vTaskDelay(30);
+    if( xLastWakeTime + 300 == xTaskGetTickCount()){
+      xLastWakeTime = xTaskGetTickCount();
+      printf("\r\nIdle Hook en funcionamiento");
+      Board_LED_Toggle(LED_BLUE);
     }
+
 }
 
 /*--------------MAIN-----------------*/
 
 int main(void){
 
-  Board_Init();
+  //Board_Init();
 
 
   xTaskCreate(vTarea, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
@@ -82,6 +79,10 @@ int main(void){
      return 0;
 }
 
+/*
+  La tarea idle Hook no puede detenerse con delay, se ejecuta continuamente mientras no hay otra ninguna tarea en ejecucion,
+  por eso para que imprima cada 300ms se uso el if que se ve en el codigo.
 
+*/
 
 /*----------------------------------------------------------------------------*/
