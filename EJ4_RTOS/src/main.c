@@ -51,7 +51,7 @@ static void vTarea(void *pvParameters){
 
 void vApplicationIdleHook( void ){
 
-    if( xLastWakeTime + 300 == xTaskGetTickCount()){
+    if( xLastWakeTime + 30 == xTaskGetTickCount()){
       xLastWakeTime = xTaskGetTickCount();
       printf("\r\nIdle Hook en funcionamiento");
       Board_LED_Toggle(LED_BLUE);
