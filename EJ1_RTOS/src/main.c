@@ -44,7 +44,7 @@ static void vTarea1(void *pvParameters){
 
 static void vTarea2( void *pvParameters){
   for(;;){
-    Board_LED_Toggle(5); //titila "LED 3" ( verde )
+    Board_LED_Toggle(LED_3); //titila "LED 3" ( verde )
     vTaskDelay( 1000 / portTICK_RATE_MS);
     //printf("Estado del led verde: %d\n", Board_LED_GetStatus(5)));
     printf("\r\nTicks configurados del reloj: %d", portTICK_RATE_MS);
