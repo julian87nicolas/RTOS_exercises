@@ -55,7 +55,7 @@ void vApplicationIdleHook( void ){
       xLastWakeTime = xTaskGetTickCount();
       printf("\r\nIdle Hook en funcionamiento");
       Board_LED_Toggle(LED_BLUE);
-      printf("\r\nEstado de LED cambiado a: %b", Board_LED_Test(LED_BLUE));
+      printf("\r\nEstado de LED cambiado a: %d", Board_LED_Test(LED_BLUE));
     }
 
 }
