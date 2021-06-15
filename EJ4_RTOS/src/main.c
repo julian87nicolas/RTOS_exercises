@@ -50,8 +50,8 @@ static void vTarea1(void *pvParameters){
 
 void vApplicationIdleHook( void ){
   TickType_t xLastWakeTime;
-  
-  prioridad = uxTaskPriorityGet(NULL);
+
+  xLastWakeTime = xTaskGetTickCount();
 
   printf("\r\nIdle Hook en funcionamiento");
   vTaskDelayUntil(&xLastWakeTime, 300 / portTICK_RATE_MS );
