@@ -39,7 +39,7 @@ static void vTarea(void *pvParameters){
   TickType_t xLastWakeTime, delay;
   prioridad = uxTaskPriorityGet(NULL);
   xLastWakeTime = xTaskGetTickCount();
-  delay = vTaskDelay(pdMS_TO_TICKS(500));
+  delay = (pdMS_TO_TICKS(500));
 
    for ( ;; ){
      //vTaskDelayUntil(&xLastWakeTime, 500 / portTICK_RATE_MS );
