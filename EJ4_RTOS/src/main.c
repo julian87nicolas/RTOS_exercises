@@ -39,7 +39,7 @@ static void vTarea(void *pvParameters){
   TickType_t xLastWakeTime, delay;
   prioridad = uxTaskPriorityGet(NULL);
   xLastWakeTime = xTaskGetTickCount();
-  delay = (pdMS_TO_TICKS(500));
+  delay = 500 / portTICK_RATE_MS;
 
    for ( ;; ){
      //vTaskDelayUntil(&xLastWakeTime, 500 / portTICK_RATE_MS );
@@ -70,7 +70,7 @@ int main(void){
   Board_Init();
 
 
-  xTaskCreate(vTarea, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
+  xTaskCreate(vTarea, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+2, NULL );
   xTaskCreate(vTarea, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
 
   //VER COMO SUAR IDLE HOOK
