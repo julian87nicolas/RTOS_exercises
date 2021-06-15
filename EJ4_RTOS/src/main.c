@@ -27,7 +27,7 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 
 /*==================[macros and definitions]=================================*/
 
-#define TAM_PILA 1024
+#define TAM_PILA 512
 
 const char *pcTextoTarea1 = "Tarea1 en funcionamiento\r\n";
 const char *pcTextoTarea2 = "Tarea2 en funcionamiento\r\n";
@@ -69,7 +69,7 @@ int main(void){
 
 
   xTaskCreate(vTarea, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTarea, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
+  xTaskCreate(vTarea, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
 
   //VER COMO SUAR IDLE HOOK
 
