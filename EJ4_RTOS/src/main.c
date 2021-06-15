@@ -24,6 +24,7 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 #include "board.h"
 #include "FreeRTOS.h"
 #include "task.h"
+#include "sapi.h"
 
 /*==================[macros and definitions]=================================*/
 
