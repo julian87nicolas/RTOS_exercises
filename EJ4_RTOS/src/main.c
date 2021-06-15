@@ -27,7 +27,7 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 
 /*==================[macros and definitions]=================================*/
 
-#define TAM_PILA 256
+#define TAM_PILA 512
 
 const char *pcTextoTarea1 = "Tarea1 en funcionamiento\r\n";
 const char *pcTextoTarea2 = "Tarea2 en funcionamiento\r\n";
