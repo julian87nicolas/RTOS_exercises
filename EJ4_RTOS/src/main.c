@@ -36,15 +36,17 @@ static void vTarea(void *pvParameters){
   int state0, state1, state2, state3;
 
   UBaseType_t prioridad;
-  TickType_t xLastWakeTime;
+  TickType_t xLastWakeTime, delay;
   prioridad = uxTaskPriorityGet(NULL);
   xLastWakeTime = xTaskGetTickCount();
+  delay = vTaskDelay(pdMS_TO_TICKS(500));
 
    for ( ;; ){
      //vTaskDelayUntil(&xLastWakeTime, 500 / portTICK_RATE_MS );
      printf((void*)pvParameters);
      printf("\r\nPrioridad: %d\r\n", prioridad);
-     vTaskDelay(pdMS_TO_TICKS(50));
+     printf("Delay: %ld\r\n", delay);
+     vTaskDelay(delay);
      //printf(portTICK_RATE_MS);
    }
 }
