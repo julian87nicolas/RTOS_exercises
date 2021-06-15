@@ -34,20 +34,28 @@ const char *pcTextoTarea2 = "Tarea2 en funcionamiento\r\n";
 
 static void vTarea1(void *pvParameters){
   int state0, state1, state2, state3;
+
   UBaseType_t prioridad;
+  TickType_t xLastWakeTime;
   prioridad = uxTaskPriorityGet(NULL);
+  xLastWakeTime = xTaskGetTickCount();
+
    for ( ;; ){
+     vTaskDelayUntil(&xLastWakeTime, 500 / portTICK_RATE_MS );
      printf((void*)pvParameters);
      printf("\r\nPrioridad: %d\r\n", prioridad);
      //printf(portTICK_RATE_MS);
-     vTaskDelay( 80 / portTICK_RATE_MS );
    }
 }
 
 void vApplicationIdleHook( void ){
+  TickType_t xLastWakeTime;
+  
+  prioridad = uxTaskPriorityGet(NULL);
+
   printf("\r\nIdle Hook en funcionamiento");
+  vTaskDelayUntil(&xLastWakeTime, 300 / portTICK_RATE_MS );
   Board_LED_Toggle(LED_BLUE);
-  vTaskDelay( 30 / portTICK_RATE_MS);
 }
 
 /*--------------MAIN-----------------*/
