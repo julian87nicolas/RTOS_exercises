@@ -27,7 +27,7 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 
 /*==================[macros and definitions]=================================*/
 
-#define TAM_PILA 512
+#define TAM_PILA 1024
 
 const char *pcTextoTarea1 = "Tarea1 en funcionamiento\r\n";
 const char *pcTextoTarea2 = "Tarea2 en funcionamiento\r\n";
@@ -44,7 +44,7 @@ static void vTarea(void *pvParameters){
      //vTaskDelayUntil(&xLastWakeTime, 500 / portTICK_RATE_MS );
      printf((void*)pvParameters);
      printf("\r\nPrioridad: %d\r\n", prioridad);
-     vTaskDelay(pdMS_TO_TICKS(500));
+     vTaskDelay(pdMS_TO_TICKS(50));
      //printf(portTICK_RATE_MS);
    }
 }
@@ -57,7 +57,7 @@ void vApplicationIdleHook( void ){
   printf("\r\nIdle Hook en funcionamiento");
   //vTaskDelayUntil(&xLastWakeTime, 300 / portTICK_RATE_MS );
   Board_LED_Toggle(LED_BLUE);
-  vTaskDelay(pdMS_TO_TICKS(300));
+  vTaskDelay(pdMS_TO_TICKS(30));
 }
 
 /*--------------MAIN-----------------*/
