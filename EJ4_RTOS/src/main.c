@@ -51,13 +51,14 @@ static void vTarea(void *pvParameters){
 
 void vApplicationIdleHook( void ){
   TickType_t xLastWakeTime;
-
   //xLastWakeTime = xTaskGetTickCount();
-
-  printf("\r\nIdle Hook en funcionamiento");
   //vTaskDelayUntil(&xLastWakeTime, 300 / portTICK_RATE_MS );
+
+for(;;){
+  printf("\r\nIdle Hook en funcionamiento");
   Board_LED_Toggle(LED_BLUE);
   vTaskDelay(pdMS_TO_TICKS(30));
+  }
 }
 
 /*--------------MAIN-----------------*/
