@@ -41,9 +41,10 @@ static void vTarea(void *pvParameters){
   xLastWakeTime = xTaskGetTickCount();
 
    for ( ;; ){
-     vTaskDelayUntil(&xLastWakeTime, 500 / portTICK_RATE_MS );
+     //vTaskDelayUntil(&xLastWakeTime, 500 / portTICK_RATE_MS );
      printf((void*)pvParameters);
      printf("\r\nPrioridad: %d\r\n", prioridad);
+     vTaskDelay(pdMS_TO_TICKS(500));
      //printf(portTICK_RATE_MS);
    }
 }
@@ -51,11 +52,12 @@ static void vTarea(void *pvParameters){
 void vApplicationIdleHook( void ){
   TickType_t xLastWakeTime;
 
-  xLastWakeTime = xTaskGetTickCount();
+  //xLastWakeTime = xTaskGetTickCount();
 
   printf("\r\nIdle Hook en funcionamiento");
-  vTaskDelayUntil(&xLastWakeTime, 300 / portTICK_RATE_MS );
+  //vTaskDelayUntil(&xLastWakeTime, 300 / portTICK_RATE_MS );
   Board_LED_Toggle(LED_BLUE);
+  vTaskDelay(pdMS_TO_TICKS(300));
 }
 
 /*--------------MAIN-----------------*/
