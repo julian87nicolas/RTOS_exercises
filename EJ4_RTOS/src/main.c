@@ -29,8 +29,8 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 
 #define TAM_PILA 512
 
-const char *pcTextoTarea1 = "Tarea1 en funcionamiento\r\n";
-const char *pcTextoTarea2 = "Tarea2 en funcionamiento\r\n";
+const char *pcTextoTarea1 = "\r\nTarea1 en funcionamiento";
+const char *pcTextoTarea2 = "\r\nTarea2 en funcionamiento";
 
 static void vTarea(void *pvParameters){
   int state0, state1, state2, state3;
