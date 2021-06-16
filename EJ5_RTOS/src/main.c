@@ -33,7 +33,7 @@ static void vTarea1(void *pvParameters){
   tiempo = 500/ portTICK_RATE_MS;
 
    for ( ;; ){
-
+    printf("\r\n Escribiendo %d en puerto serie.", tiempo);
     Escr = xQueueSend(cola_msj, &tiempo, 300 / portTICK_RATE_MS);
     printf("\r\nTarea1, el LED debe encenderse por 300ms");
     vTaskDelay(300 / portTICK_RATE_MS);
@@ -48,7 +48,7 @@ static void vTarea2( void *pvParameters){
   tiempo = 300/ portTICK_RATE_MS;
 
   for ( ;; ){
-
+    printf("\r\n Escribiendo %d en puerto serie.", tiempo);
     Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
     printf("\r\nTarea2, el LED debe encenderse por 300ms");
     vTaskDelay(300 / portTICK_RATE_MS);
