@@ -81,7 +81,8 @@ static void vTarea3 (void *pvParameters){
 
 int main(void)
 {
-  int *prendio1 = 900, *prendio2 = 250;
+  int *prendio1 = 900;
+  int *prendio2 = 250;
 
   cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
 
