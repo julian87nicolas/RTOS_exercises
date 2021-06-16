@@ -60,12 +60,13 @@ static void vTarea3 (void *pvParameters){
   int buff;
   BaseType_t Lect;
 
-  while(1){
+  for(;;){
     Board_LED_Set(LED_1, 0);
     vTaskDelay( 500 / portTICK_RATE_MS );
 
     Lect = xQueueReceive( cola_msj, &buff, 300/portTICK_RATE_MS);
-    if( Lect){
+
+    if( Lect ){
       Board_LED_Set(LED_1, 1);
       vTaskDelay(buff);
 
@@ -84,7 +85,7 @@ int main(void)
 
 	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
   xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
-  xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );
+  xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
 
 	vTaskStartScheduler();
 
