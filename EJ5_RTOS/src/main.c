@@ -60,6 +60,8 @@ static void vTarea3 (void *pvParameters){
   int buff = 100;
   BaseType_t Lect;
 
+  Lect = TRUE;
+
   for(;;){
     Board_LED_Set(LED_1, 0);
     vTaskDelay( 500 / portTICK_RATE_MS );
