@@ -73,7 +73,7 @@ static void vTarea3 (void *pvParameters){
     Board_LED_Set(LED_1, 0);
     vTaskDelay( 500 / portTICK_RATE_MS );
 
-    Lect = xQueueReceive( cola_msj, buff, 300/portTICK_RATE_MS);
+    Lect = xQueueReceive( cola_msj, &buff, 300/portTICK_RATE_MS);
     if( Lect){
       Board_LED_Set(LED_1, 1);
       vTaskDelay(buff);
