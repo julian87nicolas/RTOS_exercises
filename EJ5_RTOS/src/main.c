@@ -16,7 +16,8 @@ Indique que pasa en caso de que el timeout de la escritura en la cola de mensaje
 
 
 #define TAM_PILA 512
-
+#define TAM_COLA 2
+#define TAM_MSJ 16
 
 const char *pcTextoTarea1 = "Tarea1 is running\r\n";
 const char *pcTextoTarea2 = "Tarea2 is running\r\n";
@@ -30,11 +31,11 @@ static void vTarea1(void *pvParameters){
   BaseType_t Escr;
 
   printf("Tarea1, primer inicio\r\n");
-  tiempo = 500;
+  tiempo = 500 / portTICK_RATE_MS;
 
    for ( ;; ){
     printf("\r\n Escribiendo %d en puerto serie.", tiempo);
-    //Escr = xQueueSend(cola_msj, &tiempo, 300 / portTICK_RATE_MS);
+    Escr = xQueueSend(cola_msj, &tiempo, 300 / portTICK_RATE_MS);
     printf("\r\nTarea1, el LED debe encenderse por 300ms");
     vTaskDelay(300 / portTICK_RATE_MS);
 
@@ -45,11 +46,11 @@ static void vTarea2( void *pvParameters){
   int tiempo;
   BaseType_t Escr;
   printf("Tarea2, primer inicio\r\n");
-  tiempo = 300;
+  tiempo = 250 / portTICK_RATE_MS;
 
   for ( ;; ){
     printf("\r\n Escribiendo %d en puerto serie.", tiempo);
-    //Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
+    Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
     printf("\r\nTarea2, el LED debe encenderse por 300ms");
     vTaskDelay(300 / portTICK_RATE_MS);
    }
@@ -60,13 +61,12 @@ static void vTarea3 (void *pvParameters){
   int buff = 100;
   BaseType_t Lect;
 
-  Lect = TRUE;
 
   for(;;){
     Board_LED_Set(LED_1, 0);
     vTaskDelay( 500 / portTICK_RATE_MS );
 
-    //Lect = xQueueReceive( cola_msj, &buff, 300/portTICK_RATE_MS);
+    Lect = xQueueReceive( cola_msj, &buff, 300/portTICK_RATE_MS);
 
     if( Lect ){
       Board_LED_Set(LED_1, 1);
@@ -82,7 +82,9 @@ static void vTarea3 (void *pvParameters){
 int main(void)
 {
 
-  xQueueCreate(100, sizeof(int long ));
+  InitSerie();
+
+  cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
 
 
 	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
