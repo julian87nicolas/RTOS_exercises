@@ -26,6 +26,8 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 
 #define TAM_PILA 512
 
+const char *task1 = "Tarea 1 en funcionamiento\r\n";
+const char *task2 = "Tarea 2 en funcionamiento\r\n";
 
 TickType_t xLastWakeTime;
 
@@ -57,8 +59,8 @@ void vApplicationIdleHook( void ){
 
 int main(void){
 
-  xTaskCreate(vTarea, (const char *)"Tarea1", TAM_PILA, NULL, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTarea, (const char *)"Tarea2", TAM_PILA, NULL, tskIDLE_PRIORITY+2, NULL );
+  xTaskCreate(vTarea, (const char *)"Tarea1", TAM_PILA, (void*) task1, tskIDLE_PRIORITY+1, NULL );
+  xTaskCreate(vTarea, (const char *)"Tarea2", TAM_PILA, (void*) task2, tskIDLE_PRIORITY+2, NULL );
 
   vTaskStartScheduler();
 
