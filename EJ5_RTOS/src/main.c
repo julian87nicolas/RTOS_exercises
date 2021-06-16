@@ -27,15 +27,15 @@ QueueHandle_t cola_msj;
 
 
 static void vTareaEnvia(void *pvParameters){
-  int tiempo, LedON;
+  int TiempoON, LedON;
   BaseType_t Escr;
   LedON = (int*)pvParameters;   //Aparece un warning acá. Cuidado
 
-  tiempo = prendio / portTICK_RATE_MS;
+  TiempoON = LedON / portTICK_RATE_MS;
 
    for ( ;; ){
 
-    Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
+    Escr = xQueueSend(cola_msj, &TiempoON, 150 / portTICK_RATE_MS);
     vTaskDelay(100 / portTICK_RATE_MS);
 
    }
