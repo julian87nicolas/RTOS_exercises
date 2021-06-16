@@ -65,6 +65,7 @@ static void vTareaRecibe (void *pvParameters){
   }
 }
 
+
 int main(void)
 {
   int LedTarea1 = 900;
