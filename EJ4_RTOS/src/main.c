@@ -26,8 +26,8 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 
 #define TAM_PILA 512
 
-const char *task1 = "Tarea 1 en funcionamiento\r\n";
-const char *task2 = "Tarea 2 en funcionamiento\r\n";
+const char *task1 = "\r\nTarea 1 en funcionamiento\r\n";
+const char *task2 = "\r\nTarea 2 en funcionamiento\r\n";
 
 TickType_t xLastWakeTime;
 
