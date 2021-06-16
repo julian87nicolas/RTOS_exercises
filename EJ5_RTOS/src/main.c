@@ -27,7 +27,7 @@ QueueHandle_t cola_msj;
 
 
 static void vTareaEnvia(void *pvParameters){
-  int TiempoON, *LedON;
+  int TiempoON, LedON;
   BaseType_t Escr;
   LedON = (int*)pvParameters;   //Aparece un warning acá. Cuidado
 
@@ -69,11 +69,8 @@ static void vTareaRecibe (void *pvParameters){
 
 int main(void)
 {
-  int *LedTarea1;
-  int *LedTarea2;
-
-  &LedTarea1 = 900;
-  &LedTarea2 = 125;
+  int LedTarea1 = 900;
+  int LedTarea2 = 250;
 
   cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
 
