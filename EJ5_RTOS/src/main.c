@@ -6,34 +6,24 @@ encendido el led amarillo e indicarlo por puerto serie.
 La Tarea3 debe leer esos tiempos de la cola a medida que llegan y controlar el led en cuestión.
 Siempre, el tiempo apagado del led es de 500ms. También debe indicar por puerto serie sus acciones.
 Indique que pasa en caso de que el timeout de la escritura en la cola de mensajes sea de 300ms.
- *
- *  - xTaskCreate()
- *  - vTaskStartScheduler()
- *  - vTaskDelay(ticks)
- *
- *  */
- /*==================[inclusions]=============================================*/
+
+*/
 
 #include "board.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
 
-/*==================[macros and definitions]=================================*/
 
 #define TAM_PILA 150
 
-/*==================[internal data declaration]==============================*/
 
-/*==================[internal functions declaration]=========================*/
-
-/*==================[internal data definition]===============================*/
 const char *pcTextoTarea1 = "Tarea1 is running\r\n";
 const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 
-/*==================[external data definition]===============================*/
+
 QueueHandle_t cola_msj;
-/*==================[internal funQctions definition]==========================*/
+
 
 static void vTarea1(void *pvParameters){
   int tiempo;
@@ -84,7 +74,6 @@ static void vTarea3 (void *pvParameters){
     }
   }
 }
-/*==================[external functions definition]==========================*/
 
 int main(void)
 {
@@ -95,10 +84,8 @@ int main(void)
   xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
   xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
 
-	vTaskStartScheduler(); /* y por último se arranca el planificador . */
-    //Nunca llegara a ese lazo  .... espero
+	vTaskStartScheduler();
+
      for( ;; );
      return 0;
 }
-
-/*==================[end of file]============================================*/
