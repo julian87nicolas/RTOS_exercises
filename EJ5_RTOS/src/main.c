@@ -82,13 +82,14 @@ static void vTarea3 (void *pvParameters){
 int main(void)
 {
   int prendio1, prendio2;
+
   prendio1 = 900;
   prendio2 = 175;
-  
+
   cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
 
 	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)prendio1, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTarea2, (const char *)"Tarea1", TAM_PILA, (void*)prendio2, tskIDLE_PRIORITY+1, NULL );
+  xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)prendio2, tskIDLE_PRIORITY+1, NULL );
   xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );
 
 	vTaskStartScheduler();
