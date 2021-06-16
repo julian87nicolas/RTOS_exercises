@@ -31,7 +31,7 @@ static void vTareaEnvia(void *pvParameters){
   BaseType_t Escr;
   LedON = (int*)pvParameters;   //Aparece un warning acá. Cuidado
 
-  TiempoON = &LedON / portTICK_RATE_MS;
+  TiempoON = LedON / portTICK_RATE_MS;
 
    for ( ;; ){
 
@@ -69,8 +69,8 @@ static void vTareaRecibe (void *pvParameters){
 
 int main(void)
 {
-  int LedTarea1 = 900;
-  int LedTarea2 = 250;
+  int *LedTarea1 = 900;
+  int *LedTarea2 = 250;
 
   cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
 
