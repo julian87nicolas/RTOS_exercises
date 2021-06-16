@@ -29,7 +29,7 @@ QueueHandle_t cola_msj;
 static void vTarea1(void *pvParameters){
   int tiempo, prendio;
   BaseType_t Escr;
-  prendio = *(int*)pvParameters;
+  &prendio = *(int*)pvParameters;
 
   tiempo = prendio / portTICK_RATE_MS;
 
