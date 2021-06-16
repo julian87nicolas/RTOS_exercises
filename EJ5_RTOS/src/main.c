@@ -24,7 +24,7 @@ QueueHandle_t cola_msj;
 
 
 static void vTareaEnvia(void *pvParameters){
-  int TiempoON, LedON;
+  int TiempoON, *LedON;
   BaseType_t Escr;
   LedON = (void*)pvParameters;   //Aparece un warning acá. Cuidado
 
