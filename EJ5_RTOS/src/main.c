@@ -29,6 +29,7 @@ static void vTarea1(void *pvParameters){
   int tiempo;
   BaseType_t Escr;
 
+  printf("Tarea1, primer inicio\r\n");
   tiempo = 500/ portTICK_RATE_MS;
 
    for ( ;; ){
@@ -43,7 +44,7 @@ static void vTarea1(void *pvParameters){
 static void vTarea2( void *pvParameters){
   int tiempo;
   BaseType_t Escr;
-
+  printf("Tarea2, primer inicio\r\n");
   tiempo = 300/ portTICK_RATE_MS;
 
   for ( ;; ){
