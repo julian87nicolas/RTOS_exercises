@@ -40,7 +40,7 @@ static void vTarea(void *pvParameters){
 
    for ( ;; ){
      printf((void*)pvParameters);
-     printf("\r\nPrioridad: %d\r\n", prioridad);
+     printf("Prioridad: %d\r\n", prioridad);
      vTaskDelayUntil(&xLastWakeTime, 500 / portTICK_RATE_MS );
    }
 }
