@@ -29,7 +29,7 @@ QueueHandle_t cola_msj;
 static void vTarea1(void *pvParameters){
   int tiempo, prendio;
   BaseType_t Escr;
-  prendio = (int*)pvParameters;
+  prendio = *(int*)pvParameters;
 
   tiempo = prendio / portTICK_RATE_MS;
 
@@ -40,20 +40,8 @@ static void vTarea1(void *pvParameters){
 
    }
 }
-/*
-static void vTarea2( void *pvParameters){
-  int tiempo;
-  BaseType_t Escr;
-  tiempo = 250 / portTICK_RATE_MS;
 
-  for ( ;; ){
 
-    Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
-    vTaskDelay(100 / portTICK_RATE_MS);
-
-    }
-}
-*/
 static void vTarea3 (void *pvParameters){
 
   int buff;
