@@ -19,23 +19,19 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 
 
   */
- /*==================[inclusions]=============================================*/
 
 #include "board.h"
 #include "FreeRTOS.h"
 #include "task.h"
 
-/*==================[macros and definitions]=================================*/
-
 #define TAM_PILA 512
 
-const char *pcTextoTarea1 = "\r\nTarea1 en funcionamiento";
-const char *pcTextoTarea2 = "\r\nTarea2 en funcionamiento";
+
 TickType_t xLastWakeTime;
 
 static void vTarea(void *pvParameters){
 
-  TickType_t xLastWakeTime, delay;
+  TickType_t xLastWakeTime;
   UBaseType_t prioridad;
   prioridad = uxTaskPriorityGet(NULL);
   xLastWakeTime = xTaskGetTickCount();
@@ -44,7 +40,6 @@ static void vTarea(void *pvParameters){
      printf((void*)pvParameters);
      printf("\r\nPrioridad: %d\r\n", prioridad);
      vTaskDelayUntil(&xLastWakeTime, 500 / portTICK_RATE_MS );
-     //vTaskDelay(500 / portTICK_RATE_MS);
    }
 }
 
@@ -59,17 +54,11 @@ void vApplicationIdleHook( void ){
 
 }
 
-/*--------------MAIN-----------------*/
 
 int main(void){
 
-  //Board_Init();
-
-
-  xTaskCreate(vTarea, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTarea, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
-
-  //VER COMO SUAR IDLE HOOK
+  xTaskCreate(vTarea, (const char *)"Tarea1", TAM_PILA, NULL, tskIDLE_PRIORITY+1, NULL );
+  xTaskCreate(vTarea, (const char *)"Tarea2", TAM_PILA, NULL, tskIDLE_PRIORITY+2, NULL );
 
   vTaskStartScheduler();
 
@@ -82,6 +71,8 @@ int main(void){
 /*
   La tarea idle Hook no puede detenerse con delay, se ejecuta continuamente mientras no hay otra ninguna tarea en ejecucion,
   por eso para que imprima cada 300ms se uso el if que se ve en el codigo.
+
+  Si la tarea1 fuera continua nunca se llegaria a tener tiempo ocioso entonces vApplicationIdleHook nunca se ejecutaría.
 
 */
 
