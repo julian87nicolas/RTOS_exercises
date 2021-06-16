@@ -15,7 +15,7 @@ Indique que pasa en caso de que el timeout de la escritura en la cola de mensaje
 #include "queue.h"
 
 
-#define TAM_PILA 150
+#define TAM_PILA 512
 
 
 const char *pcTextoTarea1 = "Tarea1 is running\r\n";
@@ -82,8 +82,8 @@ int main(void)
   xQueueCreate(10, sizeof( unsigned long));
 
 	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
+  xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
+  xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );
 
 	vTaskStartScheduler();
 
