@@ -29,8 +29,6 @@ QueueHandle_t cola_msj;
 static void vTarea1(void *pvParameters){
   int tiempo;
   BaseType_t Escr;
-
-  printf("Tarea1, primer inicio\r\n");
   tiempo = 1000 / portTICK_RATE_MS;
 
    for ( ;; ){
@@ -44,7 +42,6 @@ static void vTarea1(void *pvParameters){
 static void vTarea2( void *pvParameters){
   int tiempo;
   BaseType_t Escr;
-  printf("Tarea2, primer inicio\r\n");
   tiempo = 250 / portTICK_RATE_MS;
 
   for ( ;; ){
@@ -82,10 +79,7 @@ static void vTarea3 (void *pvParameters){
 int main(void)
 {
 
-  InitSerie();
-
   cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
-
 
 	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
   xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
