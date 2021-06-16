@@ -27,11 +27,11 @@ QueueHandle_t cola_msj;
 
 
 static void vTarea1(void *pvParameters){
-  int tiempo, prendio;
+  int tiempo, *prendio;
   BaseType_t Escr;
-  prendio = (int*)pvParameters;
+  prendio = *(int*)pvParameters;
 
-  tiempo = 1000 / portTICK_RATE_MS;
+  tiempo = prendio / portTICK_RATE_MS;
 
    for ( ;; ){
 
@@ -41,7 +41,7 @@ static void vTarea1(void *pvParameters){
 
    }
 }
-
+/*
 static void vTarea2( void *pvParameters){
   int tiempo;
   BaseType_t Escr;
@@ -54,7 +54,7 @@ static void vTarea2( void *pvParameters){
 
     }
 }
-
+*/
 static void vTarea3 (void *pvParameters){
 
   int buff;
@@ -83,11 +83,12 @@ static void vTarea3 (void *pvParameters){
 int main(void)
 {
   int prendio;
-  prendio = 1000;
+  prendio1 = 1000;
+  prendio2 = 250;
   cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
 
-	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)prendio, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
+	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)prendio1, tskIDLE_PRIORITY+1, NULL );
+  xTaskCreate(vTarea2, (const char *)"Tarea1", TAM_PILA, (void*)prendio2, tskIDLE_PRIORITY+1, NULL );
   xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );
 
 	vTaskStartScheduler();
