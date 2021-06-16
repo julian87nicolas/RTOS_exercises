@@ -72,9 +72,9 @@ int main(void)
   int *LedTarea1;
   int *LedTarea2;
 
-  LedTarea1 = 900;
-  LedTarea2 = 125;
-  
+  &LedTarea1 = 900;
+  &LedTarea2 = 125;
+
   cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
 
 	xTaskCreate(vTareaEnvia, (const char *)"Tarea1", TAM_PILA, (void*)LedTarea1, tskIDLE_PRIORITY+1, NULL );
