@@ -27,7 +27,7 @@ QueueHandle_t cola_msj;
 
 
 static void vTarea1(void *pvParameters){
-  int tiempo, *prendio;
+  int tiempo, prendio;
   BaseType_t Escr;
   prendio = *(int*)pvParameters;
 
@@ -81,10 +81,7 @@ static void vTarea3 (void *pvParameters){
 
 int main(void)
 {
-  int prendio1, prendio2;
-
-  prendio1 = 900;
-  prendio2 = 175;
+  int *prendio1 = 900, *prendio2 = 250;
 
   cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
 
