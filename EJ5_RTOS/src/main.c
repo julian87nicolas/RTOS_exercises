@@ -35,7 +35,6 @@ static void vTarea1(void *pvParameters){
 
    for ( ;; ){
 
-     printf("PRENDIO = %d\r\n", prendio);
     Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
     vTaskDelay(100 / portTICK_RATE_MS);
 
@@ -82,9 +81,10 @@ static void vTarea3 (void *pvParameters){
 
 int main(void)
 {
-  int prendio;
-  prendio1 = 1000;
-  prendio2 = 250;
+  int prendio1, prendio2;
+  prendio1 = 900;
+  prendio2 = 175;
+  
   cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
 
 	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)prendio1, tskIDLE_PRIORITY+1, NULL );
