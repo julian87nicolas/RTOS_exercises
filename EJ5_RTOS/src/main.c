@@ -35,7 +35,7 @@ static void vTarea1(void *pvParameters){
 
     Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
     if(Escr) printf("\r\nESCRITURA 1 EXITOSA\r\n");
-
+    vTaskDelay(100 / portTICK_RATE_MS);
    }
 }
 
@@ -48,7 +48,7 @@ static void vTarea2( void *pvParameters){
 
     Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
     if(Escr) printf("\r\nESCRITURA 2 EXITOSA\r\n");
-
+    vTaskDelay(100 / portTICK_RATE_MS);
     }
 }
 
@@ -61,7 +61,6 @@ static void vTarea3 (void *pvParameters){
   for(;;){
 
     Lect = xQueueReceive( cola_msj, &buff, 150/portTICK_RATE_MS);
-
     if( Lect ){
       Board_LED_Set(LED_1, 1);
       printf("\r\n LED encendido por %d ms.\r\n", buff * portTICK_RATE_MS);
