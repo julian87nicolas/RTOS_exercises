@@ -31,7 +31,7 @@ static void vTarea1(void *pvParameters){
   BaseType_t Escr;
   prendio = *(int*)pvParameters;
 
-  tiempo = prendio / portTICK_RATE_MS;
+  tiempo = *prendio / portTICK_RATE_MS;
 
    for ( ;; ){
 
