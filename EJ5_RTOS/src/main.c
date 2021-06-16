@@ -27,7 +27,7 @@ QueueHandle_t cola_msj;
 
 
 static void vTarea1(void *pvParameters){
-  int tiempo;
+  int tiempo, prendio;
   BaseType_t Escr;
   prendio = (int*)pvParameters;
 
