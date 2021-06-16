@@ -31,7 +31,7 @@ static void vTareaEnvia(void *pvParameters){
   BaseType_t Escr;
   LedON = (int*)pvParameters;   //Aparece un warning acá. Cuidado
 
-  TiempoON = LedON / portTICK_RATE_MS;
+  TiempoON = *LedON / portTICK_RATE_MS;
 
    for ( ;; ){
 
