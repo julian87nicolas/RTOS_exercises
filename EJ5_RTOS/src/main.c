@@ -29,13 +29,16 @@ QueueHandle_t cola_msj;
 static void vTarea1(void *pvParameters){
   int tiempo;
   BaseType_t Escr;
+  prendio = (int*)pvParameters;
+
   tiempo = 1000 / portTICK_RATE_MS;
 
    for ( ;; ){
 
+     printf("PRENDIO = %d\r\n", prendio);
     Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
-    if(Escr) printf("\r\nESCRITURA 1 EXITOSA\r\n");
     vTaskDelay(100 / portTICK_RATE_MS);
+
    }
 }
 
@@ -47,8 +50,8 @@ static void vTarea2( void *pvParameters){
   for ( ;; ){
 
     Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
-    if(Escr) printf("\r\nESCRITURA 2 EXITOSA\r\n");
     vTaskDelay(100 / portTICK_RATE_MS);
+
     }
 }
 
@@ -79,10 +82,11 @@ static void vTarea3 (void *pvParameters){
 
 int main(void)
 {
-
+  int prendio;
+  prendio = 1000;
   cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
 
-	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
+	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)prendio, tskIDLE_PRIORITY+1, NULL );
   xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
   xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );
 
