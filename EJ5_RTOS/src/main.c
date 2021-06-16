@@ -31,7 +31,7 @@ static void vTarea1(void *pvParameters){
   BaseType_t Escr;
 
   printf("Tarea1, primer inicio\r\n");
-  tiempo = 500 / portTICK_RATE_MS;
+  tiempo = 1000 / portTICK_RATE_MS;
 
    for ( ;; ){
     printf("\r\n Escribiendo %d en puerto serie.", tiempo);
@@ -58,7 +58,7 @@ static void vTarea2( void *pvParameters){
 
 static void vTarea3 (void *pvParameters){
 
-  int buff = 100;
+  int buff;
   BaseType_t Lect;
 
 
@@ -70,6 +70,7 @@ static void vTarea3 (void *pvParameters){
 
     if( Lect ){
       Board_LED_Set(LED_1, 1);
+      printf("\r\n LED encendido por %d ms.\r\n", buff);
       vTaskDelay(buff);
 
     }
@@ -88,8 +89,8 @@ int main(void)
 
 
 	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
-  xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );
+  xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
+  xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
 
 	vTaskStartScheduler();
 
