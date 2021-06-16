@@ -19,9 +19,6 @@ Indique que pasa en caso de que el timeout de la escritura en la cola de mensaje
 #define TAM_COLA 20
 #define TAM_MSJ 16
 
-const char *pcTextoTarea1 = "Tarea1 is running\r\n";
-const char *pcTextoTarea2 = "Tarea2 is running\r\n";
-
 
 QueueHandle_t cola_msj;
 
@@ -29,7 +26,7 @@ QueueHandle_t cola_msj;
 static void vTareaEnvia(void *pvParameters){
   int TiempoON, LedON;
   BaseType_t Escr;
-  LedON = (int*)pvParameters;   //Aparece un warning acá. Cuidado
+  LedON = (void*)pvParameters;   //Aparece un warning acá. Cuidado
 
   TiempoON = LedON / portTICK_RATE_MS;
 
