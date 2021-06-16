@@ -26,10 +26,10 @@ const char *pcTextoTarea2 = "Tarea2 is running\r\n";
 QueueHandle_t cola_msj;
 
 
-static void vTarea1(void *pvParameters){
-  int tiempo, prendio;
+static void vTareaEnvia(void *pvParameters){
+  int tiempo, LedON;
   BaseType_t Escr;
-  prendio = (int*)pvParameters;
+  LedON = (int*)pvParameters;   //Aparece un warning acá. Cuidado
 
   tiempo = prendio / portTICK_RATE_MS;
 
@@ -42,7 +42,7 @@ static void vTarea1(void *pvParameters){
 }
 
 
-static void vTarea3 (void *pvParameters){
+static void vTareaRecibe (void *pvParameters){
 
   int buff;
   BaseType_t Lect;
@@ -69,14 +69,14 @@ static void vTarea3 (void *pvParameters){
 
 int main(void)
 {
-  int prendio1 = 900;
-  int prendio2 = 250;
+  int LedTarea1 = 900;
+  int LedTarea2 = 250;
 
   cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
 
-	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)prendio1, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)prendio2, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );
+	xTaskCreate(vTareaEnvia, (const char *)"Tarea1", TAM_PILA, (void*)LedTarea1, tskIDLE_PRIORITY+1, NULL );
+  xTaskCreate(vTareaEnvia, (const char *)"Tarea1", TAM_PILA, (void*)LedTarea2, tskIDLE_PRIORITY+1, NULL );
+  xTaskCreate(vTareaRecibe, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );
 
 	vTaskStartScheduler();
 
