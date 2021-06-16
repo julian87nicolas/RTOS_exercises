@@ -34,7 +34,7 @@ static void vTarea1(void *pvParameters){
    for ( ;; ){
 
     Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
-    if(Escr) printf("\r\nESCRITURA 1 EXTIOSA\r\n");
+    if(Escr) printf("\r\nESCRITURA 1 EXITOSA\r\n");
 
    }
 }
@@ -47,7 +47,7 @@ static void vTarea2( void *pvParameters){
   for ( ;; ){
 
     Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
-    if(Escr) printf("\r\nESCRITURA 2 EXTIOSA\r\n");
+    if(Escr) printf("\r\nESCRITURA 2 EXITOSA\r\n");
 
     }
 }
@@ -59,20 +59,22 @@ static void vTarea3 (void *pvParameters){
 
 
   for(;;){
-    Board_LED_Set(LED_1, 0);
-    vTaskDelay( 500 / portTICK_RATE_MS );
 
     Lect = xQueueReceive( cola_msj, &buff, 150/portTICK_RATE_MS);
 
     if( Lect ){
       Board_LED_Set(LED_1, 1);
-      printf("\r\n LED encendido por %d ms.\r\n", buff);
+      printf("\r\n LED encendido por %d ms.\r\n", buff * portTICK_RATE_MS);
       vTaskDelay(buff);
 
     }
     else{
       printf("\r\n No se pudo leer la cola.");
     }
+
+    Board_LED_Set(LED_1, 0);
+    vTaskDelay( 500 / portTICK_RATE_MS );
+
   }
 }
 
@@ -83,7 +85,7 @@ int main(void)
 
 	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
   xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
+  xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );
 
 	vTaskStartScheduler();
 
