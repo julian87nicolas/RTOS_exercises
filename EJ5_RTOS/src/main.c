@@ -16,7 +16,7 @@ Indique que pasa en caso de que el timeout de la escritura en la cola de mensaje
 
 
 #define TAM_PILA 512
-#define TAM_COLA 2
+#define TAM_COLA 20
 #define TAM_MSJ 16
 
 const char *pcTextoTarea1 = "Tarea1 is running\r\n";
