@@ -34,10 +34,9 @@ static void vTarea1(void *pvParameters){
   tiempo = 1000 / portTICK_RATE_MS;
 
    for ( ;; ){
-    printf("\r\n Escribiendo %d en puerto serie.", tiempo);
-    Escr = xQueueSend(cola_msj, &tiempo, 300 / portTICK_RATE_MS);
-    printf("\r\nTarea1, el LED debe encenderse por 300ms");
-    vTaskDelay(300 / portTICK_RATE_MS);
+
+    Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
+    if(Escr) printf("\r\nESCRITURA 1 EXTIOSA\r\n", );
 
    }
 }
@@ -49,11 +48,11 @@ static void vTarea2( void *pvParameters){
   tiempo = 250 / portTICK_RATE_MS;
 
   for ( ;; ){
-    printf("\r\n Escribiendo %d en puerto serie.", tiempo);
+
     Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
-    printf("\r\nTarea2, el LED debe encenderse por 300ms");
-    vTaskDelay(300 / portTICK_RATE_MS);
-   }
+    if(Escr) printf("\r\nESCRITURA 2 EXTIOSA\r\n", );
+
+    }
 }
 
 static void vTarea3 (void *pvParameters){
@@ -66,7 +65,7 @@ static void vTarea3 (void *pvParameters){
     Board_LED_Set(LED_1, 0);
     vTaskDelay( 500 / portTICK_RATE_MS );
 
-    Lect = xQueueReceive( cola_msj, &buff, 300/portTICK_RATE_MS);
+    Lect = xQueueReceive( cola_msj, &buff, 150/portTICK_RATE_MS);
 
     if( Lect ){
       Board_LED_Set(LED_1, 1);
