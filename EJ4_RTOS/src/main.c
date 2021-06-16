@@ -7,9 +7,6 @@ En el tiempo ocioso (Idle) aprovechar para cambiar el estado del led azul cada 3
 Justifique que sucede con los cambios de estado del led en caso que la tarea Tarea1 pase a ejecutarse de manera contínua.
 
 
-*/
-  /*
-
   LED_1 = amarillo
   LED_2 = rojo
   LED_3 = verde
@@ -77,5 +74,3 @@ int main(void){
   Si la tarea1 fuera continua nunca se llegaria a tener tiempo ocioso entonces vApplicationIdleHook nunca se ejecutaría.
 
 */
-
-/*----------------------------------------------------------------------------*/
