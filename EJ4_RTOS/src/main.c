@@ -34,18 +34,17 @@ const char *pcTextoTarea2 = "\r\nTarea2 en funcionamiento";
 TickType_t xLastWakeTime;
 
 static void vTarea(void *pvParameters){
-  TickType_t xLastWakeTime, delay;
 
-  int state0, state1, state2, state3;
+  TickType_t xLastWakeTime, delay;
   UBaseType_t prioridad;
   prioridad = uxTaskPriorityGet(NULL);
   xLastWakeTime = xTaskGetTickCount();
 
    for ( ;; ){
-     //vTaskDelayUntil(&xLastWakeTime, 500 / portTICK_RATE_MS );
      printf((void*)pvParameters);
      printf("\r\nPrioridad: %d\r\n", prioridad);
-     vTaskDelay(500 / portTICK_RATE_MS);
+     vTaskDelayUntil(&xLastWakeTime, 500 / portTICK_RATE_MS );
+     //vTaskDelay(500 / portTICK_RATE_MS);
    }
 }
 
