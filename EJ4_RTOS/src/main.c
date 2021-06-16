@@ -29,7 +29,7 @@ Justifique que sucede con los cambios de estado del led en caso que la tarea Tar
 const char *task1 = "\r\nTarea 1 en funcionamiento\r\n";
 const char *task2 = "\r\nTarea 2 en funcionamiento\r\n";
 
-TickType_t xLastWakeTime;
+TickType_t delayidleHook;
 
 static void vTarea(void *pvParameters){
 
@@ -47,8 +47,8 @@ static void vTarea(void *pvParameters){
 
 void vApplicationIdleHook( void ){
 
-    if( xLastWakeTime + ( 300 / portTICK_RATE_MS ) == xTaskGetTickCount()){
-      xLastWakeTime = xTaskGetTickCount();
+    if( delayidleHook + ( 300 / portTICK_RATE_MS ) == xTaskGetTickCount()){
+      delayidleHook = xTaskGetTickCount();
       printf("\r\n\r\nIDLE Hook en funcionamiento");
       Board_LED_Toggle(LED_BLUE);
       printf("\r\nEstado de LED cambiado a: %d\r\n\r\n", Board_LED_Test(LED_BLUE));
