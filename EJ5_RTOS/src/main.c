@@ -36,7 +36,7 @@ static void vTarea1(void *pvParameters){
    for ( ;; ){
 
     Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
-    if(Escr) printf("\r\nESCRITURA 1 EXTIOSA\r\n", );
+    if(Escr) printf("\r\nESCRITURA 1 EXTIOSA\r\n");
 
    }
 }
@@ -50,7 +50,7 @@ static void vTarea2( void *pvParameters){
   for ( ;; ){
 
     Escr = xQueueSend(cola_msj, &tiempo, 150 / portTICK_RATE_MS);
-    if(Escr) printf("\r\nESCRITURA 2 EXTIOSA\r\n", );
+    if(Escr) printf("\r\nESCRITURA 2 EXTIOSA\r\n");
 
     }
 }
