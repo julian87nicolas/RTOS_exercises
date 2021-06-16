@@ -82,7 +82,6 @@ static void vTarea3 (void *pvParameters){
     else{
       printf("\r\n No se pudo leer la cola.");
     }
-
   }
 }
 /*==================[external functions definition]==========================*/
