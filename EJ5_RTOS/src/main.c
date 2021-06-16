@@ -75,7 +75,7 @@ int main(void)
 
 	xTaskCreate(vTareaEnvia, (const char *)"Tarea1", TAM_PILA, (void*)LedTarea1, tskIDLE_PRIORITY+1, NULL );
   xTaskCreate(vTareaEnvia, (const char *)"Tarea1", TAM_PILA, (void*)LedTarea2, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTareaRecibe, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );
+  xTaskCreate(vTareaRecibe, (const char *)"Tarea2", TAM_PILA, NULL, tskIDLE_PRIORITY+3, NULL );
 
 	vTaskStartScheduler();
 
