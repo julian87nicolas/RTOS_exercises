@@ -74,9 +74,14 @@ static void vTarea3 (void *pvParameters){
     vTaskDelay( 500 / portTICK_RATE_MS );
 
     Lect = xQueueReceive( cola_msj, buff, 300/portTICK_RATE_MS);
+    if( Lect){
+      Board_LED_Set(LED_1, 1);
+      vTaskDelay(buff);
 
-    Board_LED_Set(LED_1, 1);
-    vTaskDelay(buff);
+    }
+    else{
+      printf("\r\n No se pudo leer la cola.");
+    }
 
   }
 }
@@ -85,8 +90,8 @@ static void vTarea3 (void *pvParameters){
 int main(void)
 {
 	xTaskCreate(vTarea1, (const char *)"Tarea1", TAM_PILA, (void*)pcTextoTarea1, tskIDLE_PRIORITY+1, NULL );
-  xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
-  xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+3, NULL );
+  xTaskCreate(vTarea2, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+1, NULL );
+  xTaskCreate(vTarea3, (const char *)"Tarea2", TAM_PILA, (void*)pcTextoTarea2, tskIDLE_PRIORITY+2, NULL );
 
 	vTaskStartScheduler(); /* y por último se arranca el planificador . */
     //Nunca llegara a ese lazo  .... espero
