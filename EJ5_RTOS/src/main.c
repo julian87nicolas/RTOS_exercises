@@ -59,6 +59,7 @@ static void vTareaRecibe (void *pvParameters){
     }
 
     Board_LED_Set(LED_1, 0);
+    printf("\r\n Led apagado.\r\n");
     vTaskDelay( 500 / portTICK_RATE_MS );
 
   }
