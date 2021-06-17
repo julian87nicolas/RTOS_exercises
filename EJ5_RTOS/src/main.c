@@ -66,8 +66,8 @@ static void vTareaRecibe (void *pvParameters){
 }
 
 
-int main(void)
-{
+int main(void){
+  
   int LedTarea1 = 900;
   int LedTarea2 = 250;
 
