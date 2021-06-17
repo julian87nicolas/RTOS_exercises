@@ -17,7 +17,6 @@ Indique que pasa en caso de que el timeout de la escritura en la cola de mensaje
 
 #define TAM_PILA 512
 #define TAM_COLA 20
-#define TAM_MSJ 16
 
 
 QueueHandle_t cola_msj;
@@ -67,11 +66,11 @@ static void vTareaRecibe (void *pvParameters){
 
 
 int main(void){
-  
+
   int LedTarea1 = 900;
   int LedTarea2 = 250;
 
-  cola_msj = xQueueCreate(TAM_COLA, TAM_MSJ);
+  cola_msj = xQueueCreate(TAM_COLA, sizeof( int ));
 
 	xTaskCreate(vTareaEnvia, (const char *)"Tarea1", TAM_PILA, (void*)LedTarea1, tskIDLE_PRIORITY+1, NULL );
   xTaskCreate(vTareaEnvia, (const char *)"Tarea1", TAM_PILA, (void*)LedTarea2, tskIDLE_PRIORITY+1, NULL );
