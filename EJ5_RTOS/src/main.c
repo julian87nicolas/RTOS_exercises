@@ -33,7 +33,7 @@ static void vTareaEnvia(void *pvParameters){
    for ( ;; ){
 
     Escr = xQueueSend(cola_msj, &TiempoON, 150 / portTICK_RATE_MS);
-    vTaskDelay(100 / portTICK_RATE_MS);
+    vTaskDelay(1);  // Delay de 1 tick para asegurar el cambio de tarea.
 
    }
 }
@@ -59,7 +59,7 @@ static void vTareaRecibe (void *pvParameters){
     }
 
     Board_LED_Set(LED_1, 0);
-    printf("\r\n Led apagado.\r\n");
+    printf("\r\n LED apagado.\r\n");
     vTaskDelay( 500 / portTICK_RATE_MS );
 
   }
